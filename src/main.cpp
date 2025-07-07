@@ -1,5 +1,6 @@
 #include <opencv2/opencv.hpp>
 #include "../include/color_detection.hpp"
+#include "../include/cone_detection.hpp"
 
 int main() {
     cv::Mat image = cv::imread("../data/frame_1.png");
@@ -19,6 +20,19 @@ int main() {
     cv::Mat redMask = filterRed(hsvImage);
     cv::Mat blueMask = filterBlue(hsvImage);
     cv::Mat yellowMask = filterYellow(hsvImage);
+
+    auto redCenters = getConeCenters(redMask);
+    auto blueCenters = getConeCenters(blueMask);
+    auto yellowCenters = getConeCenters(yellowMask);
+
+    // Visualizza i centroidi
+    cv::Mat output = image.clone();
+    drawCones(output, redCenters, cv::Scalar(0, 0, 255));
+    drawCones(output, blueCenters, cv::Scalar(255, 0, 0));
+    drawCones(output, yellowCenters, cv::Scalar(0, 255, 255));
+
+    cv::imshow("Coni rilevati", output);
+
 
     cv::imshow("Originale", image);
     cv::imshow("Rossi", redMask);
