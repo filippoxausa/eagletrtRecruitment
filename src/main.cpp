@@ -34,10 +34,10 @@ int main() {
     cv::imshow("Coni rilevati", output);
 
 
-    cv::imshow("Originale", image);
-    cv::imshow("Rossi", redMask);
-    cv::imshow("Blu", blueMask);
-    cv::imshow("Gialli", yellowMask);
+    // cv::imshow("Originale", image);
+    // cv::imshow("Rossi", redMask);
+    // cv::imshow("Blu", blueMask);
+    // cv::imshow("Gialli", yellowMask);
 
     cv::waitKey(0);
     return 0;
