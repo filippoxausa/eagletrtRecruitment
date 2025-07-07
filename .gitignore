@@ -18,3 +18,5 @@ CMakeUserPresets.json
 *.out
 *.log
 *.tmp
+
+.vscode
