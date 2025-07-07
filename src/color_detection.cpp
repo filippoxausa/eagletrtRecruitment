@@ -12,12 +12,12 @@ cv::Mat filterRed(const cv::Mat& hsv) {
 
 cv::Mat filterBlue(const cv::Mat& hsv) {
     cv::Mat blueMask;
-    cv::inRange(hsv, cv::Scalar(100, 100, 50), cv::Scalar(130, 255, 255), blueMask);
+    cv::inRange(hsv, cv::Scalar(99, 60, 105), cv::Scalar(115, 255, 255), blueMask);
     return blueMask;
 }
 
 cv::Mat filterYellow(const cv::Mat& hsv) {
     cv::Mat yellowMask;
-    cv::inRange(hsv, cv::Scalar(10, 150, 150), cv::Scalar(25, 255, 255), yellowMask);
+    cv::inRange(hsv, cv::Scalar(10, 82, 200), cv::Scalar(20, 255, 255), yellowMask);
     return yellowMask;
 }
