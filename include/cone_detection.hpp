@@ -10,3 +10,4 @@
 
 std::vector<cv::Point> getConeCenters(const cv::Mat& mask, double areaMin = 25.0, double areaMax = 1000.0);
 void drawCones(cv::Mat& image, const std::vector<cv::Point>& centers, const cv::Scalar& color);
+void drawSmartConeLine(cv::Mat& image, const std::vector<cv::Point>& centers, const cv::Scalar& color);
