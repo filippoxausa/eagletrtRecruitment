@@ -70,6 +70,7 @@ void drawSmartConeLine(cv::Mat& image, const std::vector<cv::Point>& centers, co
     std::vector<cv::Point> unused = centers;
     std::vector<bool> visited(unused.size(), false);
     int currentIdx = 0;
+    // Partire dal "cono più in basso", con coordinata Y maggiore
     // int currentIdx = std::distance(unused.begin(), std::max_element(unused.begin(), unused.end(), 
     //     [](const cv::Point& a, const cv::Point& b) {
     //         return a.y < b.y;

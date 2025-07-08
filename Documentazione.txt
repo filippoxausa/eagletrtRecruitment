@@ -1,0 +1,14 @@
+Inizialmente ero partito con la scala di grigi e Canny → perdo i colori, non riesco a combinare i risultati
+
+Nuova soluzione:
+
+Identificazione in base ai colori → inRange
+Finestra interattiva dinamica (altro branch) per trovare i valori precisi
+Dilate per aumentare l'area di alcuni birilli troppo piccoli
+Delimitato l'area in cui considero i birilli (ho tolto lo sfondo, cielo, e la macchina)
+Problema → un unico birillo viene identificato in due birilli, a causa della striscia bianca/nera in mezzo
+Soluzione → se la distanza tra due centri è relativamente piccola e la differenza tra la X è <=2 (sono praticamente sovrapposti in quanto il birillo è dritto), allora considera solo un centro.
+Traccio le linee → parto da un birillo (quello più in basso) e traccio la linea che collega il birillo dello stesso colore più vicino non ancora collegato con una linea.
+Problema → il birillo successivo non è detto sia il più vicino (1 → 2 → 4 → 3 → 5 ...)
+Soluzione → invece che calcolare solo la distanza euclidea per trovare il birillo successivo, utilizzo la distanza euclidea sommata alla distanza delle coordinate Y, se un birillo ha più o meno la stessa distanza da due birilli, sceglie quello più vicino in base alla distanza verticale (abs(i.y - j.y))
+
