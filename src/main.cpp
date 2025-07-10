@@ -1,6 +1,7 @@
 #include <opencv2/opencv.hpp>
 #include "../include/color_detection.hpp"
 #include "../include/cone_detection.hpp"
+#include "../include/odometry.hpp"
 
 int main() {
     cv::Mat image = cv::imread("../data/frame_1.png");
@@ -45,5 +46,18 @@ int main() {
     // cv::imshow("Gialli", yellowMask);
 
     cv::waitKey(0);
+
+    // ODOMETRY
+
+    cv::Mat img1 = image.clone();
+    cv::Mat img2 = cv::imread("../data/frame_2.png");
+    if (img2.empty()) {
+        std::cerr << "Errore: Impossibile caricare l'immagine.\n";
+        return 1;
+    }
+
+    cv::Mat K=(cv::Mat_<double>(3,3)<<387.3502807617188,0,317.7719116210938,0,387.3502807617188,242.4875946044922,0,0,1);
+    computeOdometry(img1, img2, K);
+    
     return 0;
 }
