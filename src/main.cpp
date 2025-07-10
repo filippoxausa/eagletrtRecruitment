@@ -34,6 +34,7 @@ int main() {
     // drawSmartConeLine(output, redCenters, cv::Scalar(0, 0, 255));
     drawSmartConeLine(output, blueCenters, cv::Scalar(255, 0, 0));
     drawSmartConeLine(output, yellowCenters, cv::Scalar(0, 255, 255));
+    drawSmartConeLine(output, redCenters, cv::Scalar(0, 0, 255));
 
     cv::imshow("Coni rilevati", output);
 

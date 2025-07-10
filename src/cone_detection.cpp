@@ -32,7 +32,13 @@ std::vector<cv::Point> getConeCenters(const cv::Mat& mask, double areaMin, doubl
         }
     }
 
-    // Filtra i centri per evitare duplicati
+    // Ordina i centri
+    // Il centro di ogni cono sarà quello con la coordinata Y più grande (ovvero quello più in basso nell'immagine)
+    std::sort(centers.begin(), centers.end(), [](const cv::Point& a, const cv::Point& b) {
+        return a.y > b.y;
+    });
+
+    // Filtra i centri per evitare duplicati (più centri per lo stesso birillo)
     std::vector<cv::Point> filteredCenters;
 
     for (size_t i = 0; i < centers.size(); ++i) {
@@ -60,9 +66,21 @@ std::vector<cv::Point> getConeCenters(const cv::Mat& mask, double areaMin, doubl
 void drawCones(cv::Mat& image, const std::vector<cv::Point>& centers, const cv::Scalar& color) {
     for (const auto& pt : centers) {
         cv::circle(image, pt, 4, color, -1);
-        // cv::rectangle(image, cv::Point(pt.x - 5, pt.y - 15), cv::Point(pt.x + 5, pt.y + 15), color, 1);
+
+        // Rettangolo attorno al cono con scritta passata per parametro come std::string& side
+        // cv::rectangle(image, cv::Point(pt.x - 5, pt.y - 13), cv::Point(pt.x + 5, pt.y + 13), color, 1);
+
+        // int font = cv::FONT_HERSHEY_SIMPLEX;
+        // double scale = 0.4;
+        // int thickness = 1;
+        // int baseline = 0;
+        // cv::Size textSize = cv::getTextSize(side, font, scale, thickness, &baseline);
+        // cv::Point textOrg(pt.x - textSize.width / 2, pt.y - 20);
+
+        // cv::putText(image, side, textOrg, font, scale, color, thickness);
     }
 }
+
 
 void drawSmartConeLine(cv::Mat& image, const std::vector<cv::Point>& centers, const cv::Scalar& color) {
     if (centers.size() < 2) return;

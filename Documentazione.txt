@@ -12,3 +12,4 @@ Traccio le linee → parto da un birillo (quello più in basso) e traccio la lin
 Problema → il birillo successivo non è detto sia il più vicino (1 → 2 → 4 → 3 → 5 ...)
 Soluzione → invece che calcolare solo la distanza euclidea per trovare il birillo successivo, utilizzo la distanza euclidea sommata alla distanza delle coordinate Y, se un birillo ha più o meno la stessa distanza da due birilli, sceglie quello più vicino in base alla distanza verticale (abs(i.y - j.y))
 
+TODO: Punto 5 → odometry
