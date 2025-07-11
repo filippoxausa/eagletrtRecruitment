@@ -66,18 +66,6 @@ std::vector<cv::Point> getConeCenters(const cv::Mat& mask, double areaMin, doubl
 void drawCones(cv::Mat& image, const std::vector<cv::Point>& centers, const cv::Scalar& color) {
     for (const auto& pt : centers) {
         cv::circle(image, pt, 4, color, -1);
-
-        // Rettangolo attorno al cono con scritta passata per parametro come std::string& side
-        // cv::rectangle(image, cv::Point(pt.x - 5, pt.y - 13), cv::Point(pt.x + 5, pt.y + 13), color, 1);
-
-        // int font = cv::FONT_HERSHEY_SIMPLEX;
-        // double scale = 0.4;
-        // int thickness = 1;
-        // int baseline = 0;
-        // cv::Size textSize = cv::getTextSize(side, font, scale, thickness, &baseline);
-        // cv::Point textOrg(pt.x - textSize.width / 2, pt.y - 20);
-
-        // cv::putText(image, side, textOrg, font, scale, color, thickness);
     }
 }
 

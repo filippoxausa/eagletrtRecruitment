@@ -9,9 +9,15 @@ void computeOdometry(const cv::Mat& img1, const cv::Mat& img2, const cv::Mat& K)
     std::vector<cv::KeyPoint> keypoints1, keypoints2;
     cv::Mat descriptors1, descriptors2;
 
+    // Maschera per escludere il veicolo
+    cv::Mat exclude(img1.rows, img1.cols, CV_8UC1, cv::Scalar(255));
+    cv::rectangle(exclude, cv::Point(0, LIMIT_HEIGHT_VEHICLE), cv::Point(img1.cols, img2.rows), cv::Scalar(0), cv::FILLED);
+    // cv::imshow("exclude", exclude);
+    // cv::waitKey(0);
+
     // Rileva i keypoints
-    orb->detectAndCompute(img1, cv::noArray(), keypoints1, descriptors1);
-    orb->detectAndCompute(img2, cv::noArray(), keypoints2, descriptors2);
+    orb->detectAndCompute(img1, exclude, keypoints1, descriptors1);
+    orb->detectAndCompute(img2, exclude, keypoints2, descriptors2);
 
     // Confronta i descriptor con Brute Force
     // Ogni descrittore viene confrontato con tutti gli altri della seconda immagine
@@ -59,19 +65,19 @@ void computeOdometry(const cv::Mat& img1, const cv::Mat& img2, const cv::Mat& K)
     // t non è assoluta (non si può stimare la scala reale, ho direzione, non metri)
     // verso del vettore spostamento
     std::cout << "Translation:\n" << t << std::endl;
+    std::cout << "The translation vector may be inverted due to the unknown sequence of frames" << std::endl;
+    // L'Essential Matrix contiene informazioni geometriche tra i due frame, non sa nulla sull'ordine temporale
 
     /*
     I valori (x, y, z) sono nel sistema di coordinate della camera:
     x: orizzontale (destra positiva)
     y: verticale (basso positivo)
     z: avanti (profondità positiva)
-
-    -t
     */
 
-    // Optional: Draw matches for visualization
     cv::Mat imgMatches;
     cv::drawMatches(img1, keypoints1, img2, keypoints2, goodMatches, imgMatches);
     cv::imshow("Matches", imgMatches);
     cv::waitKey(0);
+    
 }
