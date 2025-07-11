@@ -32,7 +32,6 @@ int main() {
     drawCones(output, blueCenters, cv::Scalar(255, 0, 0));
     drawCones(output, yellowCenters, cv::Scalar(0, 255, 255));
 
-    // drawSmartConeLine(output, redCenters, cv::Scalar(0, 0, 255));
     drawSmartConeLine(output, blueCenters, cv::Scalar(255, 0, 0));
     drawSmartConeLine(output, yellowCenters, cv::Scalar(0, 255, 255));
     drawSmartConeLine(output, redCenters, cv::Scalar(0, 0, 255));
@@ -45,7 +44,7 @@ int main() {
     // cv::imshow("Blu", blueMask);
     // cv::imshow("Gialli", yellowMask);
 
-    cv::waitKey(0);
+    // cv::waitKey(0);
 
     // ODOMETRY
 
@@ -56,7 +55,19 @@ int main() {
         return 1;
     }
 
-    cv::Mat K=(cv::Mat_<double>(3,3)<<387.3502807617188,0,317.7719116210938,0,387.3502807617188,242.4875946044922,0,0,1);
+/*
+       [ fx  0   cx ]
+K  =   [ 0   fy  cy ]
+       [ 0   0   1  ]
+
+    fx, fy = focal in pixel
+    cx, cy = centro immagine (metà larghezza/altezza)
+*/
+
+
+    cv::Mat K=(cv::Mat_<double>(3,3) << 387.3502807617188,  0,                  317.7719116210938, 
+                                        0,                  387.3502807617188,  242.4875946044922, 
+                                        0,                  0,                  1);
     computeOdometry(img1, img2, K);
     
     return 0;
