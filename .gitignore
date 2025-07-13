@@ -20,3 +20,6 @@ CMakeUserPresets.json
 *.tmp
 
 .vscode
+Documentazione.txt
+immagini_risultati/
+report.tex
